@@ -13,5 +13,5 @@ pip install gtts pysrt
 How to Run
 =====
 ```
-python3 srt2audio.py
+python3 srt2audio.py file.srt
 ```
