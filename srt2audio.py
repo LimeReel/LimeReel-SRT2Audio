@@ -1,4 +1,5 @@
 import os
+import sys
 from gtts import gTTS
 import pysrt
 from pydub import AudioSegment
@@ -56,8 +57,29 @@ def srt_to_audio(srt_file, output_file, language='en'):
 # Example usage
 if __name__ == "__main__":
     # Input SRT file and output MP3 file
-    input_srt = "example.srt"  # Replace with your SRT file
-    output_mp3 = "output_audio_track.mp3"  # Replace with your desired output MP3 file
+    #input_srt = "test.srt"  # Replace with your SRT file
+    #output_mp3 = "output_audio_track.mp3"  # Replace with your desired output MP3 file
+
+    # Convert SRT to synchronized MP3
+    #srt_to_audio(input_srt, output_mp3, language='en')
+    
+    
+    # Check if the script is provided with an input SRT file
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <input_srt_file>")
+        sys.exit(1)
+
+    # Get the input SRT file from command-line arguments
+    input_srt = sys.argv[1]
+
+    # Ensure the input file exists and has the correct extension
+    if not os.path.isfile(input_srt) or not input_srt.endswith(".srt"):
+        print("Error: Input file must exist and have a .srt extension.")
+        sys.exit(1)
+
+    # Derive the output MP3 file name by replacing the .srt extension with .mp3
+    output_mp3 = os.path.splitext(input_srt)[0] + ".mp3"
 
     # Convert SRT to synchronized MP3
     srt_to_audio(input_srt, output_mp3, language='en')
+
